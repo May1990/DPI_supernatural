@@ -15,9 +15,5 @@ public interface UsserDAO {
     List<Userr> findAll();
     Userr findByUserName(String userName);
     void remove(Userr user);
-    List<Userr> findFollowersByUserName(String userName);
-    List<Userr> findFollowingByUserName(String userName);
-    int findCountFollowingByUsername(Long id);
-    int findCountFollowersByUsername(Long id);
     boolean doesUsernameExist(String tempUserName);
 }

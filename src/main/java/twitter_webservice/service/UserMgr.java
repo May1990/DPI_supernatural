@@ -50,29 +50,16 @@ public class UserMgr {
         return userDao_impl.findAll();
     }
 
-    public List<Userr> getFollowers(String username){
-        return userDao_impl.findFollowersByUserName(username);
-    }
-
-    public List<Userr> getFollowing(String username){
-        return userDao_impl.findFollowingByUserName(username);
-    }
-
     public Userr getUserByUserName(String userName){
         return userDao_impl.findByUserName(userName);
     }
 
-    public Userr createUser(String password, String email, String name, String userName, String biografy, String locationX, String locationY, String website){
+    public Userr createUser(String password, String email, String name, String userName){
         Userr user = new Userr(
                 generateSHApassword(password),
                 email,
                 name,
-                userName,
-                biografy,
-                locationX,
-                locationY,
-                website,
-                "http://www.tutorialspoint.com/images/jsf-mini-logo.png"
+                userName
         );
 
         return userDao_impl.create(user);
@@ -84,14 +71,6 @@ public class UserMgr {
 
     public void setUserDao_impl(UsserDAO userDao_impl){
         this.userDao_impl = userDao_impl;
-    }
-
-    public int getCountFollowing(Long id) {
-        return userDao_impl.findCountFollowingByUsername(id);
-    }
-
-    public int getCountFollower(Long id) {
-        return userDao_impl.findCountFollowersByUsername(id);
     }
 
     public boolean doesUsernameExist(String tempUserName) {

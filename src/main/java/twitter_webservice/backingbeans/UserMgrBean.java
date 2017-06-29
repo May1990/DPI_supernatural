@@ -140,11 +140,6 @@ public class UserMgrBean implements Serializable {
     }
     //endregion
 
-    public void countFollow(){
-        countFollowing = userMgr.getCountFollowing(selectedUser.getId());
-        countFollower = userMgr.getCountFollower(selectedUser.getId());
-    }
-
     public void doesUsernameExist(){
         if(userMgr.doesUsernameExist(tempUserName)){
             usernameExist = "Username bestaat al!";
@@ -153,68 +148,10 @@ public class UserMgrBean implements Serializable {
         }
     }
 
-    public void refreshAtrUser(){
-        tempUserName = selectedUser.getUserName();
-        name = selectedUser.getName();
-        web = selectedUser.getWebsite();
-        bio = selectedUser.getBiografy();
-        pictureUrl = selectedUser.getPictureUrl();
-
-        countFollow();
-    }
-
     public void adjustUser(){
-        selectedUser.setBiografy(bio);
-        selectedUser.setWebsite(web);
         selectedUser.setName(name);
         selectedUser.setUserName(tempUserName);
-        selectedUser.setPictureUrl(pictureUrl);
 
         userMgr.adjustUser(selectedUser);
     }
-
-    //    public String allUsers(){
-//        String message = "";
-//        this.users = userMgr.getUsers();
-//        if(users == null){
-//            message = "Internal error, geen gebruikers opgehaald.";
-//        }else{
-//            message = "Succeded!";
-//        }
-//        return message;
-//    }
-//
-//    public String followersSelectedUser(String username){
-//        String message = "";
-//        this.followers = userMgr.getFollowers(username);
-//        if(followers.size() == 0){
-//            message = "Gebruiker heeft geen followers.";
-//        }else{
-//            message = "Succeded!";
-//        }
-//        return message;
-//    }
-//
-//    public String followingSelectedUser(String username){
-//        String message = "";
-//        this.following = userMgr.getFollowing(username);
-//        if(following.size() == 0){
-//            message = "Gebruiker heeft geen followings.";
-//        }else{
-//            message = "Succeded!";
-//        }
-//        return message;
-//    }
-//
-//    public String selectUserByUserName(String userName){
-//        selectedUser = userMgr.getUserByUserName(userName);
-//        String message = "";
-//        if(selectedUser == null){
-//            message = "Geen gebruiker gevonden.";
-//        }else{
-//            message = "Succeded!";
-//        }
-//
-//        return message;
-//    }
 }

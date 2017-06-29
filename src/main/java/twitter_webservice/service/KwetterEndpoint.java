@@ -11,9 +11,7 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -37,20 +35,20 @@ public class KwetterEndpoint {
     @OnMessage
     public String onTextMessage(String message, @PathParam("username") String username){
         Userr user = userMgr.getUserByUserName(username);
-        List<Userr> users = userMgr.getFollowers(username);
+       // List<Userr> users = userMgr.getFollowers(username);
 //        users.addAll(userMgr.getFollowing(username));
         LOG.info(username + " message: " + message);
 
-        for (Userr follow: users) {
-            String userName = follow.getUserName();
-            if (Sessions.containsKey(userName)){
-                try {
-                    Sessions.get(userName).getAsyncRemote().sendText(message);
-                } catch (Exception ex) {
-                    Logger.getLogger(KwetterEndpoint.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+//        for (Userr follow: users) {
+//            String userName = follow.getUserName();
+//            if (Sessions.containsKey(userName)){
+//                try {
+//                    Sessions.get(userName).getAsyncRemote().sendText(message);
+//                } catch (Exception ex) {
+//                    Logger.getLogger(KwetterEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        }
 
         return message;
     }

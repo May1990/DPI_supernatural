@@ -11,88 +11,30 @@
 <h:body>
     <section id="container">
         <ui:include src="header.xhtml" />
-        <header>
-            <h:form id="searchForm">
-                <h:inputText id="searchTxt" value="#{tweetMgr.searchWord}" onkeypress="if (event.keyCode == 13) {event.target.blur();event.stopPropagation();return false;} else {return true;};" >
-                    <f:ajax event="change" execute="searchTxt" render=":tableForm:tbvwTweets" listener="#{tweetMgr.searchWordChanged}"/>
-                </h:inputText>
-            </h:form>
-        </header>
-        <div id="start">
-            <section id="happening">
-                <h3>What's happening?</h3>
-                <h:form id="happeningForm">
-                    <h:inputHidden id="hiddenInput" value="#{registerLogIn.username}"/> <!--valueChangeListener="#{tweetMgr.updateOnMessage}"-->
-                    <h:inputTextarea id="newTweet" a:maxlength="140" styleClass="inputTweet" value="#{tweetMgr.newTweetContent}" onkeypress="if (event.keyCode == 13) {event.target.blur();event.stopPropagation();return false;} else {return true;};">
-                        <f:ajax event="change" execute="newTweet" render=":myTweetForm" listener="#{tweetMgr.addNewTweet}"/>
-                        <f:ajax event="change" execute="newTweet" onevent="sendMessage()"/>
-                    </h:inputTextarea>
-                    <p:remoteCommand onstart="setUsername();loadWebsocket()" autoRun="true"/>
-                </h:form>
+        <h:form id="fase1">
+            <h:commandButton styleClass="btn" value="Zeg een random Dean opmerking"/>
+            <h:commandButton styleClass="btn" value="Roep Crowley op"/>
+            <h:commandButton styleClass="btn" value="Roep Castiël op"/>
+        </h:form>
+        <h:form id="fase2">
+            <h:commandButton styleClass="btn" value="Zeg een random Dean opmerking"/>
+            <h:commandButton styleClass="btn" value="Ik wil informatie en ga martelen"/>
+            <h:commandButton styleClass="btn" value="Ik wil informatie en heb gewoon een gesprek"/>
+            <h:commandButton styleClass="btn" value="Ik heb hulp nodig en heb gewoon een gesprek"/>
+        </h:form>
+        <h:form prependId="false">
+            <h:panelGrid columns="2">
+                <p>Text:</p> <p:inputText value="#{messageBean.message.message}"/>
+                <p:commandButton type="reset" value="Clear"/>
+                <p:commandButton value="Send!" actionListener="#{messageBean.sendMessage}"/>
+            </h:panelGrid>
 
-                <h:form id="tableForm">
-                    <p:tabView styleClass="tabKwetter" id="tbvwTweets">
-                        <p:tab title="Timeline" id="tabTime" >
-                            <h:panelGrid columns="1" cellpadding="0" id="pnlGrdTweet" > <!--style="margin-bottom: 100px;"-->
-                                <p:dataTable id="tweetTable" tableStyle="width: auto;" tableStyleClass="timeLineTable" value="#{tweetMgr.tweets}"  var="tweet" reflow="true" rows="3" paginator="true">
-                                    <p:column>
-                                        <h:graphicImage styleClass="imageUser" value="#{tweet.owner.pictureUrl}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <b>#{tweet.owner.userName}</b><br/>
-                                        <b><small>#{tweet.timeAgo}</small></b>
-                                        #{tweet.content}
-                                    </p:column>
-                                </p:dataTable>
-                            </h:panelGrid>
-                        </p:tab>
-                        <p:tab title="@Mentions">
-                            <h:panelGrid columns="1" cellpadding="0">
-                                <h:outputText value="Francis Ford Coppola's legendary..." />
-                            </h:panelGrid>
-                        </p:tab>
-                    </p:tabView>
-                </h:form>
-            </section>
-
-            <section id="myStartInfo" onload="#{registerLogIn.refreshSizeFollow()};#{tweetMgr.refreshLastTweet()}">
-                <h:form id="myTweetForm">
-                    <h3 id="myTweetTitle">Your tweet's #{tweetMgr.tweetCount}</h3>
-
-                    <p id="myTweet">
-                        <h:graphicImage id="myTweetImage" value="#{registerLogIn.logInUser.pictureUrl}" styleClass="imageUser"/>
-                        <b><small><h:outputText value="#{tweetMgr.lastTweet.timeAgo}" /></small></b><br/>
-                        <h:outputText value="#{tweetMgr.lastTweet.content}" />
-                    </p>
-                </h:form>
-                <section id="imagesFollowing">
-                    <h2>Following</h2>
-                    <ui:repeat value="#{registerLogIn.logInUser.following}" var="folow" end="#{registerLogIn.maxFollowing}">
-                        <h:graphicImage styleClass="imageUser" value="#{folow.pictureUrl}"/>
-                    </ui:repeat>
-                </section>
-
-                <section id="imagesFollowers">
-                    <h2>Followers</h2>
-                    <ui:repeat value="#{registerLogIn.logInUser.followers}" var="folow" end="#{registerLogIn.maxFollower}">
-                        <h:graphicImage styleClass="imageUser" value="#{folow.pictureUrl}"/>
-                    </ui:repeat>
-                </section>
-
-            </section>
-            <section id="trends">
-                <h3>Trends</h3><br/>
-                <p>
-                    #loveIsInTheAir<br/>
-                    #bosselbol<br/>
-                    #oudProgramma<br/>
-                    #m44twerk<br/>
-                    #broodjeAap<br/>
-                    <h:button value="Fire!" action="#{tweetMgr.updateOnMessage()}"/>
-
-                </p>
-            </section>
-        </div>
+            <!--<p:remoteCommand name="nextMessage" actionListener="#{messageBean.firstUnreadMessage}"-->
+                             <!--oncomplete="updateMessages(xhr, status, args);"/>-->
+        </h:form>
+        <hr/>
+        <h3>Live chat</h3>
+        <div id="chat"></div>
     </section>
 </h:body>
 </html>

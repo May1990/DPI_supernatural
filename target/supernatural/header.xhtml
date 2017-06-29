@@ -17,11 +17,7 @@
             <c:otherwise>
                 <p:menubar styleClass="headermenubar">
                     <p:submenu id="submenu" label="#{registerLogIn.logInUser.userName}" >
-                        <p:menuitem value="Start" url="index.xhtml" />
-                        <p:menuitem value="Profiel" action="profile.xhtml">
-                            <f:actionListener binding="#{tweetMgr.refreshProfile()}"/>
-                            <f:actionListener binding="#{tweetMgr.refreshTweets(event)}"/>
-                        </p:menuitem>
+                        <p:menuitem value="Oproepen" url="index.xhtml" />
                         <p:separator />
                         <p:menuitem value="Uitloggen" url="login.xhtml" icon="ui-icon-extlink"/>
                     </p:submenu>

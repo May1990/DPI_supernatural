@@ -2,7 +2,6 @@ package twitter_webservice.backingbeans;
 
 import org.json.simple.JSONObject;
 import twitter_webservice.service.KwetterEndpoint;
-import twitter_webservice.service.TweetMgr;
 
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
@@ -21,8 +20,7 @@ import java.util.logging.Logger;
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue")
 })
 public class ConsumerBean implements MessageListener {
-    @Inject
-    private TweetMgr tweetMgr;
+// hier heeft een inject voor de tweetservice gestaan
     @Inject
     private KwetterEndpoint endpoint;
 
@@ -39,7 +37,7 @@ public class ConsumerBean implements MessageListener {
             int indexx = textMsg.indexOf('%');
             userName = textMsg.substring(0, indexx);
             content = textMsg.substring(indexx +1 , textMsg.length());
-            tweetMgr.createTweet(content, userName);
+            //tweetMgr.createTweet(content, userName);
 
             JSONObject obj = new JSONObject();
             obj.put("from", userName);

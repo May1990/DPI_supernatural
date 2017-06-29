@@ -14,24 +14,12 @@ public class KwetterEndpointClient{ //extends Endpoint{
     private Session session;
     private static final Logger LOG = Logger.getLogger(KwetterEndpoint.class.getName());
 
-//    Weld weld = new Weld();
-//    final WeldContainer container = weld.initialize();
-//    RequestContext requestContext= container.instance().select(RequestContext.class, UnboundLiteral.INSTANCE).get();
+//
+//
 
-//    @Inject
-//    @Notify
-//    private EventUpdateHandler eventUpdateHandler;
-//
-//    @Inject
-//    private UpdateTweetsEvent updateTweetsEvent;
-//
-//    TweetMgrBean tw;
 //    PartialViewContext pw;
 //
-//    public void setval(TweetMgrBean bean, PartialViewContext x){
-//        tw = bean;
-//        pw = x;
-//    }
+
 ////    private final PushServlet pushServlet = new PushServlet();
 ////
 //    public void onOpen(final Session session, EndpointConfig config){
@@ -64,15 +52,5 @@ public class KwetterEndpointClient{ //extends Endpoint{
 
 //    public void observeRegistrationActivity(@Observes RegistrationActivity someRegistrationActivity) {
 //        EventBusFactory.getDefault().eventBus().publish("/onMessageEvent", "There was another registration");
-//    }
-//
-//
-//    public void hello(){
-//        events.fire(new UpdateTweetsEvent("from bean " + System.currentTimeMillis()));
-//    }
-//
-//    public void change(@Observes UpdateTweetsEvent updateTweetsEvent) {
-//        LOG.info("!!!! retrieved: "+ "event fired");
-//
 //    }
 }

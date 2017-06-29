@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="supernatural:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="supernatural.war">
+      <element id="artifact" artifact-name="kwetter:war exploded" />
+    </root>
+  </artifact>
+</component>
